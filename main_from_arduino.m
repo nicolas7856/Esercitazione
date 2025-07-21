@@ -5,7 +5,7 @@ close all;
 % --- Parametri ---
 fs = 100;               % Frequenza di campionamento [Hz]
 Ts = 1/fs;
-A = 0.8;                % Ampiezza nota
+A = 1;                % Ampiezza nota
 phi = 0.2;              % Fase
 f0 = 0.2;               % Frequenza reale [Hz]
 window_size = 1000;      % Finestra visibile nel plot
@@ -13,6 +13,7 @@ buffer = zeros(window_size, 1);  % Inizializzazione buffer
 t_buffer = zeros(window_size, 1);
 n_total = 0;
 data_from_serial = 0; % Variabile per salvare il valore dalla seriale
+offset = 512;
 
 % Imposta connessione seriale
 serial = serialport("COM3", 9600);      % Controllare la COM del pc
@@ -58,7 +59,7 @@ while true
 
     for k = 1:Ngrid
         f = f_grid(k);
-        s = A * sin(2*pi*f*n*Ts + phi);
+        s = (A * sin(2*pi*f*n*Ts + phi)) + offset;
         e = y_temp - s;
         J_grid(k) = sum(e.^2);
     end
