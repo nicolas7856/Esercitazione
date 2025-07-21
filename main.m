@@ -23,7 +23,7 @@ title('PPG Simulato - Real Time');
 %xlim([0, window_size*Ts]);
 ylim([-1.5, 1.5]);
 grid on;
-
+%ciao prova
 while true
     % Simula l'arrivo di un nuovo campione
     n_total = n_total + 1;
